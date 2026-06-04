@@ -1,0 +1,35 @@
+<html>
+	<head>
+		<title>Algoritmo 2.1</title>
+	</head>
+	<body>
+		<h1 align="center">Algoritmo 2.1</h1>
+		<script>
+			function busca(lista, chave){
+				let i = 0;
+				let busca1 = -1;
+				let n = lista.length;
+				while( i < n ){
+					if( lista[i] == chave ){
+						busca1 = i; // chave encontrada
+						// i = n + 1; // 
+						break; // usando break retiramos duas operações: adição e atribuição e mais um teste lógico "i < n"
+					}
+					else{
+						i = i + 1 // sequencia prossegue
+					}
+				}
+				return busca1;
+			}
+			// http://dontpad.com/uniasselvi/complexidade
+			let L = ["Natalia", "Eduardo", "Lucas", "Juan", "Gabriel", "Erick", "Gabriel2", "Erick2"];
+			console.log( L );
+			let nome = "Gabriel";
+			console.log( nome + " está na posicao " + (busca(L, nome)+1) );
+			nome = "Juan";
+			console.log( nome + " está na posicao " + (busca(L, nome)+1) );
+			nome = "Leonardo";
+			console.log( nome + ( (busca(L, nome)+1)==0 ? " nao encontrado" : (" está na posicao " +  (busca(L, nome)+1)) ) );
+		</script>
+	</body>
+</html>

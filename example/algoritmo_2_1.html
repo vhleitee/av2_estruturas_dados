@@ -1,0 +1,59 @@
+<html>
+	<head>
+		<title>Algoritmo 2.1</title>
+	</head>
+	<body>
+		<h1 align="center">Algoritmo 2.1</h1>
+		<script>
+
+			function busca(lista, chave){
+				let i = 0;
+				let busca1 = -1;
+				let n = lista.length;
+				while( i < n ){
+					if( lista[i] == chave ){
+						busca1 = i; // chave encontrada
+						i = n + 1; // finaliza a busca
+					}
+					else{
+						i = i + 1; // sequencia prossegue
+					}
+				}
+				return busca1;
+			}
+
+			// http://dontpad.com/uniasselvi/complexidade
+			
+			console.log("-------------------");
+			console.log("Busca Sequencial 1");
+			console.log("-------------------");
+			let Lista1 = [5, 15, 3, 19, 36];
+
+			let valor = 19;
+			console.log( valor + " está na posicao " + (busca(Lista1, valor)+1) );
+
+			valor = 15;
+			console.log( valor + " está na posicao " + (busca(Lista1, valor)+1) );
+
+			valor = 91;
+			console.log( valor + ( (busca(Lista1, valor)+1)==0 ? " nao encontrado" : (" está na posicao " +  (busca(Lista1, valor)+1)) ) );
+		
+
+			console.log("-------------------");
+			console.log("Busca Sequencial 2");
+			console.log("-------------------");
+
+			let Lista2 = [-1, 19, 3, 36, 15];
+			
+			valor = 19;
+			console.log( valor + " está na posicao " + (busca(Lista2, valor)+1) );
+
+			valor = 15;
+			console.log( valor + " está na posicao " + (busca(Lista2, valor)+1) );
+
+			valor = 91;
+			console.log( valor + ( (busca(Lista2, valor)+1)==0 ? " nao encontrado" : (" está na posicao " +  (busca(Lista2, valor)+1)) ) );
+		
+		</script>
+	</body>
+</html>

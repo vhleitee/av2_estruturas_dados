@@ -1,0 +1,40 @@
+<html>
+	<head>
+		<title>Algoritmo 2.2</title>
+	</head>
+	<body>
+		<h1 align="center">Algoritmo 2.2</h1>
+		<script>
+			function busca(lista, chave){
+				let n = lista.length;
+				lista[n] = chave;
+				let i = 0;
+				while( lista[i] != chave ){
+					i = i + 1 // sequencia prossegue
+				}
+				
+				if( i != n ){
+					return i; // elemento encontrado
+				}
+				else{
+					return -1; // elemento nao encontrado
+				}
+			}
+
+			// http://dontpad.com/uniasselvi/complexidade
+
+			let L = ["Natalia", "Eduardo", "Lucas", "Juan", "Gabriel", "Erick", "Gabriel2", "Erick2"];
+			console.log( L );
+
+			let nome = "Gabriel";
+			console.log( nome + " está na posicao " + (busca(L, nome)+1) );
+
+			nome = "Nathalia";
+			console.log( nome + " está na posicao " + (busca(L, nome)+1) );
+
+			nome = "Leonardo";
+			console.log( nome + ( (busca(L, nome)+1)==0 ? " nao encontrado" : (" está na posicao " +  (busca(L, nome)+1)) ) );
+		
+		</script>
+	</body>
+</html>

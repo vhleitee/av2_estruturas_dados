@@ -1,0 +1,48 @@
+<html>
+	<head>
+		<title>Algoritmo 2.7</title>
+	</head>
+	<body>
+		<script>
+			class Pilha{
+				constructor(quantidadeMaxima){
+					this.M = quantidadeMaxima;
+					this.topo = -1;
+					this.lista = new Array();
+				}
+				
+				insercaoNaPilha(valor){
+					if( this.topo != (this.M - 1) ){
+					// ou 
+					//if( topo < M ){ // mais eficiente por causa de não usar parenteses e a subtração
+						this.topo = this.topo + 1;
+						this.lista[this.topo] = valor;
+					}
+					else{
+						throw new Error("overflow");
+					}
+				}
+				
+				getLista(){
+					return this.lista;
+				}
+			}
+			
+			// https://dontpad.com/uniasselvi/estrutura
+			
+			let pilha1 = new Pilha(5);
+			pilha1.insercaoNaPilha( 68 );
+			console.log( pilha1.getLista() );
+			pilha1.insercaoNaPilha( 22 );
+			console.log( pilha1.getLista() );
+			pilha1.insercaoNaPilha( 14 );
+			console.log( pilha1.getLista() );
+			pilha1.insercaoNaPilha( 12 );
+			console.log( pilha1.getLista() );
+			pilha1.insercaoNaPilha( 11 );
+			console.log( pilha1.getLista() );
+			pilha1.insercaoNaPilha( 21 );
+			console.log( pilha1.getLista() );
+		</script>
+	</body>
+</html>

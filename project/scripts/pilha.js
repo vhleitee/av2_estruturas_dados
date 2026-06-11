@@ -7,18 +7,16 @@ class Pilha {
 
     push(e) {
         if (this.topo >= this.tamanho) {
-            throw new Error("Pilha cheia");
+            throw new FullStackException();
         }
-
         this.items[this.topo] = e;
         this.topo++;
     }
 
     pop() {
         if (this.topo === 0) {
-            throw new Error("Pilha vazia");
+            throw new EmptyStackException();
         }
-
         this.topo--;
         return this.items[this.topo];
     }
@@ -33,30 +31,10 @@ class Pilha {
 
     top() {
         if (this.topo === 0) {
-            throw new Error("Pilha vazia");
+            throw new EmptyStackException();
         }
-
         return this.items[this.topo - 1];
     }
-
-    //Este método é apenas para fins de teste e não faz parte da implementação tradicional de uma pilha
-    //Método criado por Vitor!
-    //Referencia do uso do push() https://www.w3schools.com/jsref/jsref_push.asp
-    getItems() {
-        if (this.topo === 0) {return "Pilha vazia";}
-        let resultado = [];
-        for (let i = 0; i < this.topo; i++) {
-            resultado.push(this.items[i]);
-        }
-        return resultado;
-    }
-}
-
-//Esta função é apenas para fins de teste e não faz parte da implementação tradicional de uma pilha
-//Função criada por Vitor, sem referencia externa!
-//Função para adicionar mensagens de teste na interface HTML
-function adicionarMensagem(texto) {
-    document.getElementById("content-pilha").innerHTML += `<p>${texto}</p>`;
 }
 
 //Função principal para testar a implementação da pilha
@@ -64,88 +42,101 @@ function adicionarMensagem(texto) {
 //Esta função é chamada quando a página é carregada para executar os testes da pilha e exibir os resultados na interface HTML
 function mainpilha() {
 
-    adicionarMensagem("=== TESTE DA PILHA ===");
+    //Container onde a mensagem é escrita
+    container = "content-pilha";
+
+    // Abre a seção da pilha para mostrar os resultados dos testes
+    // Referência: https://www.w3schools.com/jsref/prop_details_open.asp
+    document.getElementById("pilha-section").open = true; 
+
+    //Chama a função que esta na pasta ../scripts/utils.js para adicionar mensagens na interface HTML
+    adicionarMensagem("=== TESTE DA PILHA ===", container);
     const pilha = new Pilha(3);
-    adicionarMensagem("Pilha criada com tamanho 3");
+    adicionarMensagem("Pilha criada com tamanho 3", container);
 
     // Estado inicial
-    adicionarMensagem(`isEmpty() = ${pilha.isEmpty()}`);
-    adicionarMensagem(`size() = ${pilha.size()}`);
-    adicionarMensagem(`-----------------------------------------`);
+    adicionarMensagem(`isEmpty() = ${pilha.isEmpty()}`, container);
+    adicionarMensagem(`size() = ${pilha.size()}`, container);
+    adicionarMensagem(`-----------------------------------------`, container);
 
     // Teste de push
     pilha.push(10);
-    adicionarMensagem("push(10)");
-    adicionarMensagem(`getItems() = ${pilha.getItems()}`);
-    adicionarMensagem(`-----------------------------------------`);
+    adicionarMensagem("push(10)", container);
+    adicionarMensagem(`top() = ${pilha.top()}`, container);
+    adicionarMensagem(`isEmpty() = ${pilha.isEmpty()}`, container);
+    adicionarMensagem(`size() = ${pilha.size()}`, container);
+    adicionarMensagem(`-----------------------------------------`, container);
 
     pilha.push(20);
-    adicionarMensagem("push(20)");
-    adicionarMensagem(`getItems() = ${pilha.getItems()}`);
-    adicionarMensagem(`-----------------------------------------`);
-
-    adicionarMensagem(`size() = ${pilha.size()}`);
-    adicionarMensagem(`top() = ${pilha.top()}`);
-    adicionarMensagem(`getItems() = ${pilha.getItems()}`);
-    adicionarMensagem(`-----------------------------------------`);
+    adicionarMensagem("push(20)", container);
+    adicionarMensagem(`top() = ${pilha.top()}`, container);
+    adicionarMensagem(`isEmpty() = ${pilha.isEmpty()}`, container);
+    adicionarMensagem(`size() = ${pilha.size()}`, container);
+    adicionarMensagem(`-----------------------------------------`, container);
 
     pilha.push(30);
-    adicionarMensagem("push(30)");
-    adicionarMensagem(`getItems() = ${pilha.getItems()}`);
-    adicionarMensagem(`-----------------------------------------`);
-    
-    adicionarMensagem(`size() = ${pilha.size()}`);
-    adicionarMensagem(`top() = ${pilha.top()}`);
-    adicionarMensagem(`getItems() = ${pilha.getItems()}`);
-    adicionarMensagem(`-----------------------------------------`);
+    adicionarMensagem("push(30)", container);
+    adicionarMensagem(`top() = ${pilha.top()}`, container);
+    adicionarMensagem(`isEmpty() = ${pilha.isEmpty()}`, container);
+    adicionarMensagem(`size() = ${pilha.size()}`, container);
+    adicionarMensagem(`-----------------------------------------`, container);
 
     // Teste de pilha cheia
     try {
-        adicionarMensagem("Tentando push(40) em pilha cheia...");
+        adicionarMensagem("Tentando push(40) em pilha cheia...", container);
         pilha.push(40);
-    } catch (erro) {
-        adicionarMensagem(`Erro esperado: ${erro.message}`);
+    } catch (e) {
+        adicionarMensagem(`Erro esperado: ${e.message}`, container);
     }
-    adicionarMensagem(`getItems() = ${pilha.getItems()}`);
-    adicionarMensagem(`-----------------------------------------`);
+    adicionarMensagem(`top() = ${pilha.top()}`, container);
+    adicionarMensagem(`isEmpty() = ${pilha.isEmpty()}`, container);
+    adicionarMensagem(`size() = ${pilha.size()}`, container);
+    adicionarMensagem(`-----------------------------------------`, container);
 
     // Teste de pop
-    adicionarMensagem(`pop() = ${pilha.pop()}`);
-    adicionarMensagem(`size() = ${pilha.size()}`);
-    adicionarMensagem(`-----------------------------------------`);
+    adicionarMensagem(`pop() = ${pilha.pop()}`, container);
+    adicionarMensagem(`top() = ${pilha.top()}`, container);
+    adicionarMensagem(`isEmpty() = ${pilha.isEmpty()}`, container);
+    adicionarMensagem(`size() = ${pilha.size()}`, container);
+    adicionarMensagem(`-----------------------------------------`, container);
 
-    adicionarMensagem(`pop() = ${pilha.pop()}`);
-    adicionarMensagem(`top() = ${pilha.top()}`);
-    adicionarMensagem(`getItems() = ${pilha.getItems()}`);
-    adicionarMensagem(`-----------------------------------------`);
+    adicionarMensagem(`pop() = ${pilha.pop()}`, container);
+    adicionarMensagem(`top() = ${pilha.top()}`, container);
+    adicionarMensagem(`isEmpty() = ${pilha.isEmpty()}`, container);
+    adicionarMensagem(`size() = ${pilha.size()}`, container);
+    adicionarMensagem(`-----------------------------------------`, container);
 
-    adicionarMensagem(`pop() = ${pilha.pop()}`);
-    adicionarMensagem(`getItems() = ${pilha.getItems()}`);
-    adicionarMensagem(`-----------------------------------------`);
-
-    adicionarMensagem(`isEmpty() = ${pilha.isEmpty()}`);
-    adicionarMensagem(`size() = ${pilha.size()}`);
-    adicionarMensagem(`-----------------------------------------`);
+    adicionarMensagem(`pop() = ${pilha.pop()}`, container);
+    adicionarMensagem(`isEmpty() = ${pilha.isEmpty()}`, container);
+    adicionarMensagem(`size() = ${pilha.size()}`, container);
+    adicionarMensagem(`-----------------------------------------`, container);
 
     // Teste top() em pilha vazia
     try {
-        adicionarMensagem("Tentando top() em pilha vazia...");
+        adicionarMensagem("Tentando top() em pilha vazia...", container);
         pilha.top();
-    } catch (erro) {
-        adicionarMensagem(`Erro esperado: ${erro.message}`);
+    } catch (e) {
+        adicionarMensagem(`Erro esperado: ${e.message}`, container);
     }
-    adicionarMensagem(`getItems() = ${pilha.getItems()}`);
-    adicionarMensagem(`-----------------------------------------`);
+    adicionarMensagem(`isEmpty() = ${pilha.isEmpty()}`, container);
+    adicionarMensagem(`size() = ${pilha.size()}`, container);
+    adicionarMensagem(`-----------------------------------------`, container);
 
     // Teste pop() em pilha vazia
     try {
-        adicionarMensagem("Tentando pop() em pilha vazia...");
+        adicionarMensagem("Tentando pop() em pilha vazia...", container);
         pilha.pop();
-    } catch (erro) {
-        adicionarMensagem(`Erro esperado: ${erro.message}`);
+    } catch (e) {
+        adicionarMensagem(`Erro esperado: ${e.message}`, container);
     }
-    adicionarMensagem(`getItems() = ${pilha.getItems()}`);
-    adicionarMensagem(`-----------------------------------------`);
+    adicionarMensagem(`isEmpty() = ${pilha.isEmpty()}`, container);
+    adicionarMensagem(`size() = ${pilha.size()}`, container);
+    adicionarMensagem(`-----------------------------------------`, container);
 
-    adicionarMensagem("=== FIM DOS TESTES ===");
+    adicionarMensagem("=== FIM DOS TESTES ===", container);
+
+    // Abre a seção da pilha para mostrar os resultados dos testes
+    // Referência: https://www.w3schools.com/jsref/prop_details_open.asp
+    document.getElementById("pilha-section").open = false; 
+
 }

@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AV2 - Estruturas de Dados</title>
 
+    <script type="text/javascript" src="scripts/utils.js"></script>
     <script type="text/javascript" src="scripts/pilha.js"></script>
+    <script type="text/javascript" src="scripts/fila.js"></script>
+    <script type="text/javascript" src="scripts/listas_sequenciais.js"></script>
     <link rel="stylesheet" href="css/main.css">
 
 </head>
@@ -14,49 +17,49 @@
     <h1>AV2 - Estruturas de Dados</h1>
     <p>Aluno: Vitor Hugo Leite</p>  
 
-    <details open>
+    <details id="pilha-section">
         <summary>Pilha</summary>
         <p>Conteúdo relacionado à estrutura de dados Pilha.</p>
         <div id="content-pilha" class="content-text"></div>
     </details>
 
-    <details open>
+    <details id="fila-section">
         <summary>Fila</summary>
         <p>Conteúdo relacionado à estrutura de dados Fila.</p>
         <div id="content-fila" class="content-text"></div>
     </details>
 
-    <details open>
+    <details id="listas-sequenciais-section">
         <summary>Listas Sequenciais</summary>
         <p>Conteúdo relacionado à estrutura de dados Listas Sequenciais.</p>
         <div id="content-listas-sequenciais" class="content-text"></div>
     </details>
 
-    <details open>
+    <details id="listas-simplesmente-encadeadas-section">
         <summary>Listas Simplesmente Encadeadas</summary>
         <p>Conteúdo relacionado à estrutura de dados Listas simplesmente encadeadas.</p>
         <div id="content-listas-simplesmente-encadeadas" class="content-text"></div>
     </details>
 
-    <details open>
+    <details id="listas-duplamente-encadeadas-section">
         <summary>Listas Duplamente Encadeadas</summary>
         <p>Conteúdo relacionado à estrutura de dados Listas duplamente encadeadas.</p>
         <div id="content-listas-duplamente-encadeadas" class="content-text"></div>
     </details>
 
-    <details open>
+    <details id="árvores-section">
         <summary>Árvores</summary>
         <p>Conteúdo relacionado à estrutura de dados árvores.</p>
         <div id="content-árvores" class="content-text"></div>
     </details>
 
-    <details open>
+    <details id="árvores-binárias-section">
         <summary>Árvores Binárias</summary>
         <p>Conteúdo relacionado à estrutura de dados árvores binárias.</p>
         <div id="content-árvores-binárias" class="content-text"></div>
     </details>
 
-    <details open>
+    <details id="grafos-section">
         <summary>Grafos</summary>
         <p>Conteúdo relacionado à estrutura de dados grafos.</p>
         <div id="content-grafos" class="content-text"></div>
@@ -67,6 +70,12 @@
     <script>
         window.onload = () => {
             mainpilha();
+            mainfila();
+           /*
+           Validar estrutura com Everton na sexta-feira, dia 12/06/2026
+           mainlistasSequenciais();
+           */
+          
         };
     </script>
 

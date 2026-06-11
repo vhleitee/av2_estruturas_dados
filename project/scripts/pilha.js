@@ -1,20 +1,20 @@
 class Pilha {
     constructor(M) {
         this.P = [];
-        this.topo = 0;
+        this.topo = -1;
         this.M = M;
     }
 
     //Implementado de acordo com o livro, como métodos adicional
     //Livro: Estruturas de Dados e Algoritmos em Java Michael T. Goodrich; Roberto Tamassia, Capítulo 5
     size() {
-        return this.topo;
+        return this.topo + 1;
     }
 
     //Implementado de acordo com o livro, como métodos adicional
     //Livro: Estruturas de Dados e Algoritmos em Java Michael T. Goodrich; Roberto Tamassia, Capítulo 5
     isEmpty() {
-        return this.topo === 0;
+        return this.topo === -1;
     }
 
     //Implementado de acordo com o livro, como métodos adicional
@@ -23,13 +23,13 @@ class Pilha {
         if (this.isEmpty()) {
             throw new Error("Pilha vazia");
         }
-        return this.P[this.topo - 1];
+        return this.P[this.topo];
     }
 
     push(e) {
-        if (this.topo != this.M){
-            this.P[this.topo] = e
+        if (this.size() != this.M) {
             this.topo++;
+            this.P[this.topo] = e
         }else{
             throw new Error("Pilha cheia");
         }
@@ -38,10 +38,9 @@ class Pilha {
     pop() {
         if (this.isEmpty()){
             throw new Error("Pilha vazia");
-        }else{
-            this.topo--;
-            return this.P[this.topo];
         }
+        this.topo--;
+        return this.P[this.topo + 1 ];
     }
 }
 

@@ -1,17 +1,57 @@
 class Fila{
     constructor(tamanhoM) {
         this.M = tamanhoM;          
-        this.F = [];                 
+        this.F = new Array();            
         this.f = -1;                 
         this.r = -1;                 
     }
 
     enqueue(e){
+        let prov = (this.r + 1) % this.M;
 
+        if (prov != this.f) {
+            this.r = prov;
+            this.F[this.r] = e;
+
+            if (this.f === -1) {
+                this.f = 0;
+            }
+        }else{
+            throw new Error("overflow");
+        }
     }
 
     dequeue(){
+        if (this.f != -1) {
+            let valorRecuperado = this.F[this.f];
 
+            if (this.f === this.r) {
+                this.f = -1;
+                this.r = -1;
+            } else {
+                this.f = (this.f + 1) % this.M;
+            }
+
+            return valorRecuperado;
+        }else{
+            throw new Error("underflow");
+        }
+    }
+
+    // Método para obter a representação da fila como string para exibição na interface HTML
+    getLista(){
+        let str = "";   
+        if (this.f != -1) {
+            let i = this.f;
+            while (true) {
+                str += " " + this.F[i] + " ";
+                if (i === this.r) {
+                    break;
+                }
+                i = (i + 1) % this.M;
+            }
+        }
+        return "[" + str + "]";
     }
 }
 
@@ -32,91 +72,63 @@ function mainfila() {
 
     const fila = new Fila(3);
     adicionarMensagem("Fila criada com tamanho 3", container);
-    // Estado inicial
-    adicionarMensagem(`isEmpty() = ${fila.isEmpty()}`, container);
-    adicionarMensagem(`size() = ${fila.size()}`, container);
+    // Estado inicial da fila
+
+    adicionarMensagem(`-----------------------------------------`, container);
+    adicionarMensagem("Estado inicial da fila:", container);
+    adicionarMensagem(fila.getLista(), container);
     adicionarMensagem(`-----------------------------------------`, container);
 
-    // Teste de enqueue
-    fila.enqueue(10);
-    adicionarMensagem("enqueue(10)", container);
-    adicionarMensagem(`front() = ${fila.front()}`, container);
-    adicionarMensagem(`size() = ${fila.size()}`, container);
-    adicionarMensagem(`isEmpty() = ${fila.isEmpty()}`, container);
-    adicionarMensagem(`-----------------------------------------`, container);
-
-    fila.enqueue(20);
-    adicionarMensagem("enqueue(20)", container);
-    adicionarMensagem(`front() = ${fila.front()}`, container);
-    adicionarMensagem(`size() = ${fila.size()}`, container);
-    adicionarMensagem(`isEmpty() = ${fila.isEmpty()}`, container);
-    adicionarMensagem(`-----------------------------------------`, container);
-
-    fila.enqueue(30);
-    adicionarMensagem("enqueue(30)", container);
-    adicionarMensagem(`front() = ${fila.front()}`, container);
-    adicionarMensagem(`size() = ${fila.size()}`, container);
-    adicionarMensagem(`isEmpty() = ${fila.isEmpty()}`, container);
-    adicionarMensagem(`-----------------------------------------`, container);
-
-    // Teste de fila cheia
-    adicionarMensagem(`Teste de fila cheia`, container);
+    adicionarMensagem("Inserindo elementos na fila:", container);
     try {
-        fila.enqueue(40);
-    } catch (e) {
-        adicionarMensagem(`Erro esperado: ${e.message}`, container);
+        fila.enqueue(10);   
+        adicionarMensagem("Elemento 10 inserido", container);
+        adicionarMensagem(fila.getLista(), container);
+        adicionarMensagem(`-----------------------------------------`, container);
+
+        fila.enqueue(20);
+        adicionarMensagem("Elemento 20 inserido", container);
+        adicionarMensagem(fila.getLista(), container);
+        adicionarMensagem(`-----------------------------------------`, container);
+
+        fila.enqueue(30);
+        adicionarMensagem("Elemento 30 inserido", container);
+        adicionarMensagem(fila.getLista(), container);
+        adicionarMensagem(`-----------------------------------------`, container);
+
+        adicionarMensagem("Tentando inserir elemento 40 (deve causar overflow):", container);
+        fila.enqueue(40); // Este enqueue deve causar overflow
+
+    } catch (error) {
+        adicionarMensagem(`Erro: ${error.message} (overflow)`, container);
+        adicionarMensagem(fila.getLista(), container);
+        adicionarMensagem(`-----------------------------------------`, container);
     }
-    adicionarMensagem(`front() = ${fila.front()}`, container);
-    adicionarMensagem(`size() = ${fila.size()}`, container);
-    adicionarMensagem(`isEmpty() = ${fila.isEmpty()}`, container);
-    adicionarMensagem(`-----------------------------------------`, container);
 
-    fila.dequeue();
-    adicionarMensagem("dequeue()", container);
-    adicionarMensagem(`front() = ${fila.front()}`, container);
-    adicionarMensagem(`size() = ${fila.size()}`, container);
-    adicionarMensagem(`isEmpty() = ${fila.isEmpty()}`, container);
-    adicionarMensagem(`-----------------------------------------`, container);
-
-    fila.dequeue();
-    adicionarMensagem("dequeue()", container);
-    adicionarMensagem(`front() = ${fila.front()}`, container);
-    adicionarMensagem(`size() = ${fila.size()}`, container);
-    adicionarMensagem(`isEmpty() = ${fila.isEmpty()}`, container);
-    adicionarMensagem(`-----------------------------------------`, container);
-
-    fila.enqueue(40);
-    adicionarMensagem("enqueue(40)", container);
-    adicionarMensagem(`front() = ${fila.front()}`, container);
-    adicionarMensagem(`size() = ${fila.size()}`, container);
-    adicionarMensagem(`isEmpty() = ${fila.isEmpty()}`, container);
-    adicionarMensagem(`-----------------------------------------`, container);
-
-    fila.dequeue();
-    adicionarMensagem("dequeue()", container);
-    adicionarMensagem(`front() = ${fila.front()}`, container);
-    adicionarMensagem(`size() = ${fila.size()}`, container);
-    adicionarMensagem(`isEmpty() = ${fila.isEmpty()}`, container);
-    adicionarMensagem(`-----------------------------------------`, container);
-
-    fila.dequeue();
-    adicionarMensagem("dequeue()", container);
-    adicionarMensagem(`isEmpty() = ${fila.isEmpty()}`, container);
-    adicionarMensagem(`size() = ${fila.size()}`, container);
-    adicionarMensagem(`isEmpty() = ${fila.isEmpty()}`, container);
-    adicionarMensagem(`-----------------------------------------`, container);
-
-    adicionarMensagem(`Teste de fila vazia`, container);
-    // Teste de fila vazia
+    adicionarMensagem("Removendo elementos da fila:", container);
     try {
-        fila.dequeue();
-    } catch (e) {
-        adicionarMensagem(`Erro esperado: ${e.message}`, container);
+        let valor1 = fila.dequeue();   
+        adicionarMensagem(`Elemento ${valor1} removido`, container);
+        adicionarMensagem(fila.getLista(), container);
+        adicionarMensagem(`-----------------------------------------`, container);
+
+        let valor2 = fila.dequeue();
+        adicionarMensagem(`Elemento ${valor2} removido`, container);
+        adicionarMensagem(fila.getLista(), container);
+        adicionarMensagem(`-----------------------------------------`, container);
+
+        let valor3 = fila.dequeue();
+        adicionarMensagem(`Elemento ${valor3} removido`, container);
+        adicionarMensagem(fila.getLista(), container);
+        adicionarMensagem(`-----------------------------------------`, container);
+
+        adicionarMensagem("Tentando remover elemento de fila vazia (deve causar underflow):", container);
+        fila.dequeue(); // Este dequeue deve causar underflow
+    } catch (error) {
+        adicionarMensagem(`Erro: ${error.message} (underflow)`, container);
+        adicionarMensagem(fila.getLista(), container);
+        adicionarMensagem(`-----------------------------------------`, container);
     }
-    adicionarMensagem(`isEmpty() = ${fila.isEmpty()}`, container);
-    adicionarMensagem(`size() = ${fila.size()}`, container);
-    adicionarMensagem(`isEmpty() = ${fila.isEmpty()}`, container);
-    adicionarMensagem(`-----------------------------------------`, container);
 
     adicionarMensagem("=== FIM DOS TESTES ===", container);
 

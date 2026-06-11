@@ -76,14 +76,13 @@ function mainpilha() {
         adicionarMensagem(pilha.getLista(), container);
         adicionarMensagem(`-----------------------------------------`, container);  
 
+        adicionarMensagem("Tentando inserir o elemento 40 na pilha (deve causar overflow)", container);
         pilha.push(40); // Este push deve causar overflow
-        adicionarMensagem(pilha.getLista(), container);
-        adicionarMensagem(`-----------------------------------------`, container);  
     }    catch (error) {
         adicionarMensagem(`Erro: ${error.message} (overflow)`, container);
+        adicionarMensagem(pilha.getLista(), container);
+        adicionarMensagem(`-----------------------------------------`, container);  
     }
-
-    adicionarMensagem(`-----------------------------------------`, container);
 
     adicionarMensagem("Removendo elementos da pilha:", container);
     try {
@@ -102,9 +101,12 @@ function mainpilha() {
         adicionarMensagem(pilha.getLista(), container);
         adicionarMensagem(`-----------------------------------------`, container);  
 
+        adicionarMensagem("Tentando remover um elemento da pilha vazia (deve causar underflow)", container);
         pilha.pop(); // Este pop deve causar underflow
     } catch (error) {
         adicionarMensagem(`Erro: ${error.message} (underflow)`, container);
+        adicionarMensagem(pilha.getLista(), container);
+        adicionarMensagem(`-----------------------------------------`, container);
     }
 
     adicionarMensagem("=== FIM DOS TESTES ===", container);

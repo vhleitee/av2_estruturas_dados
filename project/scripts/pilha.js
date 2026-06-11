@@ -6,47 +6,40 @@ o ponteiro é decrementado, apontando para o novo topo da pilha após a remoçã
 */
 
 class Pilha {
-    constructor(M) {
-        this.P = [];
+    constructor(quantidadeMaxima) {
+        this.M = quantidadeMaxima;
         this.topo = -1;
-        this.M = M;
-    }
-
-    //Implementado de acordo com o livro, como métodos adicional
-    //Livro: Estruturas de Dados e Algoritmos em Java Michael T. Goodrich; Roberto Tamassia, Capítulo 5
-    size() {
-        return this.topo + 1;
-    }
-
-    //Implementado de acordo com o livro, como métodos adicional
-    //Livro: Estruturas de Dados e Algoritmos em Java Michael T. Goodrich; Roberto Tamassia, Capítulo 5
-    isEmpty() {
-        return this.topo === -1;
-    }
-
-    //Implementado de acordo com o livro, como métodos adicional
-    //Livro: Estruturas de Dados e Algoritmos em Java Michael T. Goodrich; Roberto Tamassia, Capítulo 5
-    top() {
-        if (this.isEmpty()) {
-            throw new Error("Pilha vazia");
-        }
-        return this.P[this.topo];
+        this.lista = new Array();
     }
 
     push(e) {
-        if (this.size() === this.M) {
-            throw new Error("Pilha cheia");
+        if(this.topo != (this.M - 1)){
+            this.topo = this.topo + 1;
+            this.lista[this.topo] = e;
         }
-        this.topo++;
-        this.P[this.topo] = e;
+        else{
+            throw new Error("overflow");
+        }
     }
 
     pop() {
-        if (this.isEmpty()){
-            throw new Error("Pilha vazia");
+        if(this.topo != -1){
+            let valor_recuperado = this.lista[this.topo];
+            this.topo = this.topo - 1;
+            return valor_recuperado;
         }
-        this.topo--;
-        return this.P[this.topo + 1 ];
+        else{
+            throw new Error("underflow");
+        }
+    }
+
+    //Implementação de um método para retornar a lista atual da pilha, mostrando os elementos do topo até o fundo da pilha
+    getLista(){
+        let str  = "";
+        for( let i = 0; i <= this.topo; i++ ){
+            str = str + " " + this.lista[i] + " ";
+        }
+        return "[" + str + "]";
     }
 }
 
@@ -67,84 +60,52 @@ function mainpilha() {
     const pilha = new Pilha(3);
     adicionarMensagem("Pilha criada com tamanho 3", container);
 
-    // Estado inicial
-    adicionarMensagem(`isEmpty() = ${pilha.isEmpty()}`, container);
-    adicionarMensagem(`size() = ${pilha.size()}`, container);
     adicionarMensagem(`-----------------------------------------`, container);
-
-    // Teste de push
-    pilha.push(10);
-    adicionarMensagem("push(10)", container);
-    adicionarMensagem(`top() = ${pilha.top()}`, container);
-    adicionarMensagem(`isEmpty() = ${pilha.isEmpty()}`, container);
-    adicionarMensagem(`size() = ${pilha.size()}`, container);
-    adicionarMensagem(`-----------------------------------------`, container);
-
-    pilha.push(20);
-    adicionarMensagem("push(20)", container);
-    adicionarMensagem(`top() = ${pilha.top()}`, container);
-    adicionarMensagem(`isEmpty() = ${pilha.isEmpty()}`, container);
-    adicionarMensagem(`size() = ${pilha.size()}`, container);
-    adicionarMensagem(`-----------------------------------------`, container);
-
-    pilha.push(30);
-    adicionarMensagem("push(30)", container);
-    adicionarMensagem(`top() = ${pilha.top()}`, container);
-    adicionarMensagem(`isEmpty() = ${pilha.isEmpty()}`, container);
-    adicionarMensagem(`size() = ${pilha.size()}`, container);
-    adicionarMensagem(`-----------------------------------------`, container);
-
-    // Teste de pilha cheia
+    adicionarMensagem("Inserindo elementos na pilha:", container);
     try {
-        adicionarMensagem("Tentando push(40) em pilha cheia...", container);
-        pilha.push(40);
-    } catch (e) {
-        adicionarMensagem(`Erro esperado: ${e.message}`, container);
+        pilha.push(10);
+        adicionarMensagem("Elemento 10 inserido", container);
+        adicionarMensagem(pilha.getLista(), container);
+        adicionarMensagem(`-----------------------------------------`, container);  
+        pilha.push(20);
+        adicionarMensagem("Elemento 20 inserido", container);
+        adicionarMensagem(pilha.getLista(), container);
+        adicionarMensagem(`-----------------------------------------`, container);  
+        pilha.push(30);
+        adicionarMensagem("Elemento 30 inserido", container);
+        adicionarMensagem(pilha.getLista(), container);
+        adicionarMensagem(`-----------------------------------------`, container);  
+
+        pilha.push(40); // Este push deve causar overflow
+        adicionarMensagem(pilha.getLista(), container);
+        adicionarMensagem(`-----------------------------------------`, container);  
+    }    catch (error) {
+        adicionarMensagem(`Erro: ${error.message} (overflow)`, container);
     }
-    adicionarMensagem(`top() = ${pilha.top()}`, container);
-    adicionarMensagem(`isEmpty() = ${pilha.isEmpty()}`, container);
-    adicionarMensagem(`size() = ${pilha.size()}`, container);
+
     adicionarMensagem(`-----------------------------------------`, container);
 
-    // Teste de pop
-    adicionarMensagem(`pop() = ${pilha.pop()}`, container);
-    adicionarMensagem(`top() = ${pilha.top()}`, container);
-    adicionarMensagem(`isEmpty() = ${pilha.isEmpty()}`, container);
-    adicionarMensagem(`size() = ${pilha.size()}`, container);
-    adicionarMensagem(`-----------------------------------------`, container);
-
-    adicionarMensagem(`pop() = ${pilha.pop()}`, container);
-    adicionarMensagem(`top() = ${pilha.top()}`, container);
-    adicionarMensagem(`isEmpty() = ${pilha.isEmpty()}`, container);
-    adicionarMensagem(`size() = ${pilha.size()}`, container);
-    adicionarMensagem(`-----------------------------------------`, container);
-
-    adicionarMensagem(`pop() = ${pilha.pop()}`, container);
-    adicionarMensagem(`isEmpty() = ${pilha.isEmpty()}`, container);
-    adicionarMensagem(`size() = ${pilha.size()}`, container);
-    adicionarMensagem(`-----------------------------------------`, container);
-
-    // Teste top() em pilha vazia
+    adicionarMensagem("Removendo elementos da pilha:", container);
     try {
-        adicionarMensagem("Tentando top() em pilha vazia...", container);
-        pilha.top();
-    } catch (e) {
-        adicionarMensagem(`Erro esperado: ${e.message}`, container);
-    }
-    adicionarMensagem(`isEmpty() = ${pilha.isEmpty()}`, container);
-    adicionarMensagem(`size() = ${pilha.size()}`, container);
-    adicionarMensagem(`-----------------------------------------`, container);
+        let valor1 = pilha.pop();   
+        adicionarMensagem(`Elemento ${valor1} removido`, container);
+        adicionarMensagem(pilha.getLista(), container);
+        adicionarMensagem(`-----------------------------------------`, container);  
 
-    // Teste pop() em pilha vazia
-    try {
-        adicionarMensagem("Tentando pop() em pilha vazia...", container);
-        pilha.pop();
-    } catch (e) {
-        adicionarMensagem(`Erro esperado: ${e.message}`, container);
+        let valor2 = pilha.pop();
+        adicionarMensagem(`Elemento ${valor2} removido`, container);
+        adicionarMensagem(pilha.getLista(), container);
+        adicionarMensagem(`-----------------------------------------`, container);  
+
+        let valor3 = pilha.pop();
+        adicionarMensagem(`Elemento ${valor3} removido`, container);
+        adicionarMensagem(pilha.getLista(), container);
+        adicionarMensagem(`-----------------------------------------`, container);  
+
+        pilha.pop(); // Este pop deve causar underflow
+    } catch (error) {
+        adicionarMensagem(`Erro: ${error.message} (underflow)`, container);
     }
-    adicionarMensagem(`isEmpty() = ${pilha.isEmpty()}`, container);
-    adicionarMensagem(`size() = ${pilha.size()}`, container);
-    adicionarMensagem(`-----------------------------------------`, container);
 
     adicionarMensagem("=== FIM DOS TESTES ===", container);
 

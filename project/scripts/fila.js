@@ -1,43 +1,18 @@
 class Fila{
-    constructor(tamanho){
-        this.items = [];
-        this.inicio = 0;
-        this.fim = 0;
-        this.tamanho = tamanho;
+    constructor(tamanhoM) {
+        this.M = tamanhoM;          
+        this.F = [];                 
+        this.f = -1;                 
+        this.r = -1;                 
     }
 
-    size(){
-        return this.fim - this.inicio;
-    }
+    enqueue(e){
 
-    front(){
-        if(this.size() === 0){
-            throw new EmptyQueueException();
-        }
-        return this.items[this.inicio];
-    }
-
-    isEmpty(){
-        return this.size() === 0;
     }
 
     dequeue(){
-        if(this.size() === 0){
-            throw new EmptyQueueException();
-        }
-        const item = this.items[this.inicio];
-        this.inicio++;
-        return item;
-    }
 
-    enqueue(item){
-        if(this.size() === this.tamanho){
-            throw new FullQueueException();
-        }
-        this.items[this.fim] = item;
-        this.fim++;
     }
-
 }
 
 //Função principal para testar a implementação da fila

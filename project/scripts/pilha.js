@@ -5,25 +5,6 @@ class Pilha {
         this.M = M;
     }
 
-    push(e) {
-        if (this.topo != this.M){
-            this.topo++;
-            this.P[this.topo] = e
-        }else{
-            throw new Error("Pilha cheia");
-        }
-    }
-
-    pop() {
-        if (this.topo != this.size){
-            let valorRetorno = this.P[this.topo];
-            this.topo--;
-            return valorRetorno;
-        }else{
-            throw new Error("Pilha vazia");
-        }
-    }
-
     //Implementado de acordo com o livro, como métodos adicional
     //Livro: Estruturas de Dados e Algoritmos em Java Michael T. Goodrich; Roberto Tamassia, Capítulo 5
     size() {
@@ -39,10 +20,28 @@ class Pilha {
     //Implementado de acordo com o livro, como métodos adicional
     //Livro: Estruturas de Dados e Algoritmos em Java Michael T. Goodrich; Roberto Tamassia, Capítulo 5
     top() {
-        if (!this.isEmpty) {
+        if (this.isEmpty()) {
             throw new Error("Pilha vazia");
         }
-        return this.P[this.topo];
+        return this.P[this.topo - 1];
+    }
+
+    push(e) {
+        if (this.topo != this.M){
+            this.P[this.topo] = e
+            this.topo++;
+        }else{
+            throw new Error("Pilha cheia");
+        }
+    }
+
+    pop() {
+        if (this.isEmpty()){
+            throw new Error("Pilha vazia");
+        }else{
+            this.topo--;
+            return this.P[this.topo];
+        }
     }
 }
 
@@ -61,7 +60,7 @@ function mainpilha() {
     //Chama a função que esta na pasta ../scripts/utils.js para adicionar mensagens na interface HTML
     adicionarMensagem("=== TESTE DA PILHA ===", container);
     const pilha = new Pilha(3);
-    adicionarMensagem("Pilha criada com M 3", container);
+    adicionarMensagem("Pilha criada com tamanho 3", container);
 
     // Estado inicial
     adicionarMensagem(`isEmpty() = ${pilha.isEmpty()}`, container);

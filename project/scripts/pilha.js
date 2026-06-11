@@ -1,39 +1,48 @@
 class Pilha {
-    constructor(tamanho) {
-        this.items = [];
+    constructor(M) {
+        this.P = [];
         this.topo = 0;
-        this.tamanho = tamanho;
+        this.M = M;
     }
 
     push(e) {
-        if (this.topo >= this.tamanho) {
-            throw new FullStackException();
+        if (this.topo != this.M){
+            this.topo++;
+            this.P[this.topo] = e
+        }else{
+            throw new Error("Pilha cheia");
         }
-        this.items[this.topo] = e;
-        this.topo++;
     }
 
     pop() {
-        if (this.topo === 0) {
-            throw new EmptyStackException();
+        if (this.topo != this.size){
+            let valorRetorno = this.P[this.topo];
+            this.topo--;
+            return valorRetorno;
+        }else{
+            throw new Error("Pilha vazia");
         }
-        this.topo--;
-        return this.items[this.topo];
     }
 
+    //Implementado de acordo com o livro, como métodos adicional
+    //Livro: Estruturas de Dados e Algoritmos em Java Michael T. Goodrich; Roberto Tamassia, Capítulo 5
     size() {
         return this.topo;
     }
 
+    //Implementado de acordo com o livro, como métodos adicional
+    //Livro: Estruturas de Dados e Algoritmos em Java Michael T. Goodrich; Roberto Tamassia, Capítulo 5
     isEmpty() {
         return this.topo === 0;
     }
 
+    //Implementado de acordo com o livro, como métodos adicional
+    //Livro: Estruturas de Dados e Algoritmos em Java Michael T. Goodrich; Roberto Tamassia, Capítulo 5
     top() {
-        if (this.topo === 0) {
-            throw new EmptyStackException();
+        if (!this.isEmpty) {
+            throw new Error("Pilha vazia");
         }
-        return this.items[this.topo - 1];
+        return this.P[this.topo];
     }
 }
 
@@ -52,7 +61,7 @@ function mainpilha() {
     //Chama a função que esta na pasta ../scripts/utils.js para adicionar mensagens na interface HTML
     adicionarMensagem("=== TESTE DA PILHA ===", container);
     const pilha = new Pilha(3);
-    adicionarMensagem("Pilha criada com tamanho 3", container);
+    adicionarMensagem("Pilha criada com M 3", container);
 
     // Estado inicial
     adicionarMensagem(`isEmpty() = ${pilha.isEmpty()}`, container);

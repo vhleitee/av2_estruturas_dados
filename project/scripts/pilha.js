@@ -1,3 +1,10 @@
+/*
+O ponteiro sempre aponta para o topo da pilha, ou seja, o último elemento inserido.
+Quando a pilha está vazia, o ponteiro é -1. Quando um elemento é inserido,
+o ponteiro é incrementado e aponta para o novo topo da pilha. Quando um elemento é removido,
+o ponteiro é decrementado, apontando para o novo topo da pilha após a remoção.
+*/
+
 class Pilha {
     constructor(M) {
         this.P = [];
@@ -27,12 +34,11 @@ class Pilha {
     }
 
     push(e) {
-        if (this.size() != this.M) {
-            this.topo++;
-            this.P[this.topo] = e
-        }else{
+        if (this.size() === this.M) {
             throw new Error("Pilha cheia");
         }
+        this.topo++;
+        this.P[this.topo] = e;
     }
 
     pop() {

@@ -9,7 +9,7 @@ class Pilha {
     constructor(quantidadeMaxima) {
         this.M = quantidadeMaxima;
         this.topo = -1;
-        this.lista = new Array();
+        this.lista = new Array(quantidadeMaxima);
     }
 
     push(e) {
@@ -33,7 +33,7 @@ class Pilha {
         }
     }
 
-    //Implementação de um método para retornar a lista atual da pilha, mostrando os elementos do topo até o fundo da pilha
+    // Método para obter a representação da fila como string para exibição na interface HTML
     getLista(){
         let str  = "";
         for( let i = 0; i <= this.topo; i++ ){
@@ -51,7 +51,7 @@ function mainpilha() {
     //Container onde a mensagem é escrita
     container = "content-pilha";
 
-    // Abre a seção da pilha para mostrar os resultados dos testes
+    // Abre a seção para mostrar os resultados dos testes
     // Referência: https://www.w3schools.com/jsref/prop_details_open.asp
     document.getElementById("pilha-section").open = true; 
 
@@ -111,7 +111,7 @@ function mainpilha() {
 
     adicionarMensagem("=== FIM DOS TESTES ===", container);
 
-    // Abre a seção da pilha para mostrar os resultados dos testes
+    // Fecha a seção
     // Referência: https://www.w3schools.com/jsref/prop_details_open.asp
     document.getElementById("pilha-section").open = false; 
 

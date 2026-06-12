@@ -1,7 +1,7 @@
 class Fila{
     constructor(tamanhoM) {
         this.M = tamanhoM;          
-        this.F = new Array();            
+        this.F = new Array(tamanhoM);            
         this.f = -1;                 
         this.r = -1;                 
     }
@@ -63,7 +63,7 @@ function mainfila() {
     //Container onde a mensagem é escrita
     container = "content-fila";
 
-    // Abre a seção da fila para mostrar os resultados dos testes
+    // Abre a seção para mostrar os resultados dos testes
     // Referência: https://www.w3schools.com/jsref/prop_details_open.asp
     document.getElementById("fila-section").open = true; 
 
@@ -132,7 +132,7 @@ function mainfila() {
 
     adicionarMensagem("=== FIM DOS TESTES ===", container);
 
-    // Fecha seção da fila após os testes para manter a interface organizada
+    // Fecha seção
     // Referência: https://www.w3schools.com/jsref/prop_details_open.asp
     document.getElementById("fila-section").open = false; 
 
